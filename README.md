@@ -46,7 +46,7 @@ The following configuration options can be set and/or changed:
 
 | Option | Type | Default | Description |
 | ---- | ---- | ---- | ---- |
-| `accessToken` | `string` | `"eyJhbGci..."` | !!!! |
+| `accessToken` | `string` | `"eyJhbGci..."` | accessToken to be requested with AppSecret (from Solarman customer service): see https://community.home-assistant.io/t/collect-inverter-data-from-solarman-api/328760 |
 | `deviceSn` | `string` | `"220107..."` | Device Serial Number of your inverter |
 | `appId` | `string` | `"10220727..."` | AppId, provided by Solarman customer service |
 | `showTempWhenOnline` | `boolean` | `true` | Temperature of device will be displayed in header |
