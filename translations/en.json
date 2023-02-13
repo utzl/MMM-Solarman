@@ -1,0 +1,9 @@
+{
+    "LOADING": "Loading...",
+    "ERROR": "Error...",
+    "DAILYPRODUCTION": "Daily Production",
+    "TOTALPRODUCTION": "Total Production",
+    "CURRENTPRODUCTION": "Current Power Output",
+	"YEARPRODUCTION": "Production this year",
+	"MONTHPRODUCTION": "Production this month"
+}

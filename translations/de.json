@@ -1,0 +1,9 @@
+{
+    "LOADING": "Lade...",
+    "ERROR": "Fehler...",
+    "DAILYPRODUCTION": "Tagesleistung",
+    "TOTALPRODUCTION": "Gesamtleistung",
+    "CURRENTPRODUCTION": "Aktuelle Leistung",
+	"YEARPRODUCTION": "Produktion dieses Jahr",
+	"MONTHPRODUCTION": "Produktion dieser Monat"
+}
