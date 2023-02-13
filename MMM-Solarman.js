@@ -12,15 +12,17 @@ Module.register("MMM-Solarman", {
 		deviceSn: '',
 		appId: '',
 		showTempWhenOnline: true,
-		updateInterval: 1 * 60 * 1000, // every minute
+		updateInterval: 2 * 60 * 1000, // every minute
 		animationSpeed: 2 * 1000, // 2 seconds
 	},
+	
 	
 	// Define required styles.
     getStyles: function() {
         return['MMM-Solarman.css'];
     },
     
+	
 	// Define required translations.
     getTranslations: function() {
         return {
@@ -29,11 +31,13 @@ Module.register("MMM-Solarman", {
         }
     },
 	
+	
 	start: function() {
-		this.getData();
-		this.loaded = false;
-		this.scheduleUpdate();
+		this.getData();			// initial get data
+		this.loaded = false;	// used to have animation speed only after screen start
+		this.scheduleUpdate();	// initiate cyclic refresh of get data
 	}, 
+
 
 	scheduleUpdate: function (delay) {
     // initialize nextLoad variable with the value of this.config.updateInterval
@@ -51,42 +55,51 @@ Module.register("MMM-Solarman", {
 	},
 
 	
+	// get data from node_helper
 	getData: function () {
     this.sendSocketNotification("GET_DATA", this.config);
 	},
 	
+	
+	// receive data from node_helper
 	socketNotificationReceived: function(notification, payload) {
 	    var self = this;
 		if (notification === "DATA") {
 			let animationSpeed = self.config.animationSpeed;
-            if (this.loaded) {
+            // set animation speed to zero after initial screen load
+			if (this.loaded) {
                 animationSpeed = 0;
             }
 			this.fetchedData = payload;
 			this.loaded = true;
            
-		    // Update dom with given animation speed.
+		    // Update dom with given animation speed
             this.updateDom(animationSpeed);
 	    }
 	},
 	
+	
 	// Define header -> user input in config.js
 	getHeader: function() { 
-    // initialize the headerTitle variable with the value of this.data.header
+		// initialize the headerTitle variable with the value of this.data.header
 		var headerTitle = this.data.header;
-    // check if data is available and loaded
+		// check if data is available and loaded
 		if (this.loaded && !(this.fetchedData === null || this.fetchedData === undefined )) {
-      // check the device state
+			// check the device state
 			if (this.fetchedData.deviceState == 3)
-				// if device is offline, append ' - Offline' to headerTitle
-				headerTitle += "  -  Offline";
-			if (this.fetchedData.deviceState == 1)
+				headerTitle += "  |  Offline";  // if device is offline, append ' | Offline' to headerTitle
+			if (this.fetchedData.deviceState == 1){
+				// if device is online, look for temperature value
+				for (let i = 0; i < this.fetchedData.dataList.length; i++){
+					if (this.fetchedData.dataList[i].key == 'AC_RDT_T1')
+						var actTemp = this.fetchedData.dataList[i].value;
+				}
+				// present temp in header depending on configuration in config file
 				if (this.config.showTempWhenOnline)
-					// if device is online and showTempWhenOnline is true, append ' - Online - [temp]°C' to headerTitle
-					headerTitle += "  -  Online  -  " + parseFloat(this.fetchedData.dataList[39].value).toFixed(1) + "°C";
+					headerTitle += "  |  Online  |  " + parseFloat(actTemp).toFixed(1) + "°C";
 				else
-					// if device is online and showTempWhenOnline is false, append ' - Online' to headerTitle
-					headerTitle += "  -  Online";
+					headerTitle += "  |  Online";
+			}
 		}
 		// return the final headerTitle
 		return headerTitle;
@@ -95,11 +108,8 @@ Module.register("MMM-Solarman", {
 	
 	// Override dom generator.
     getDom: function() {
-        //const wrapper = document.createElement("div");
-		
-		
+        
 		var wrapper = document.createElement("div");
-		//wrapper.innerHTML = 'Hello world!';
         
         if (this.config.accesstoken == "") {
             wrapper.innerHTML = "No <i>Access-Token</i> in config file set.";
@@ -121,28 +131,34 @@ Module.register("MMM-Solarman", {
 			return wrapper;
 		
 		// get values
-		var actPower = this.fetchedData.dataList[27].value;
-		var dailyProd = parseFloat(this.fetchedData.dataList[34].value).toFixed(1);
-		//var totalProd = parseInt(this.fetchedData.dataList[29].value); 
+		// sometime length of list changes so that a direct assignment via a position number is not successful: 
+		// therefore the values of interest are searched inside the whole list
+		for (let i = 0; i < this.fetchedData.dataList.length; i++){
+			if (this.fetchedData.dataList[i].key == 'APo_t1')
+				var actPower = this.fetchedData.dataList[i].value;
+			if (this.fetchedData.dataList[i].key == 'Etdy_ge0')
+				var dailyProd = parseFloat(this.fetchedData.dataList[i].value).toFixed(1);
+		}
+		 
 		var totalProdY = parseFloat(this.fetchedData.hisDataY[0].value).toFixed(1); 
 		var totalProdM = parseFloat(this.fetchedData.hisDataM[0].value).toFixed(1);
 		
-		// dataList[27] = APo_t1 = actPower
-		// dataList[34] = Etdy_ge0 = dailyProd
-		// dataList[29] = Et_ge0 = totalProd
-		// dataList[39] = AC_RDT_T1 = Temperature
-		// dataList[04] = Year (YY)
-		// dataList[05] = Month (M / MM)
-		// dataList[06] = Day (D / DD)
+		// dataList[28].key = APo_t1 = actPower
+		// dataList[35].key = Etdy_ge0 = dailyProd
+		// dataList[30].key = Et_ge0 = totalProd
+		// dataList[40].key = AC_RDT_T1 = Temperature
+		// dataList[03].key = Year (YY)
+		// dataList[04].key = Month (M / MM)
+		// dataList[05].key = Day (D / DD)
 		
 		// set actPower to zero if offline
 		if (this.fetchedData.deviceState == 3)
 			actPower = '-';
 
-
 		// Create dom table
         const table = document.createElement("table");
-
+		
+		// row for current production
 		dataRow = document.createElement("tr");
         // CURRENTPRODUCTION
         dataCellTitle = document.createElement("td");
@@ -162,9 +178,9 @@ Module.register("MMM-Solarman", {
         // Append data row to table.
         table.appendChild(dataRow);
 		
-		
+		// row for daily production
 		dataRow = document.createElement("tr");
-        // CURRENTPRODUCTION
+        // DAILYPRODUCTION
         dataCellTitle = document.createElement("td");
         dataCellTitle.className = "MMM-Solarman item";
         dataCellTitle.innerHTML = this.translate("DAILYPRODUCTION"); 
@@ -182,9 +198,9 @@ Module.register("MMM-Solarman", {
         // Append data row to table.
         table.appendChild(dataRow);
 		
-		
+		// row for month production
 		dataRow = document.createElement("tr");
-        // CURRENTPRODUCTION
+        // MONTHPRODUCTION
         dataCellTitle = document.createElement("td");
         dataCellTitle.className = "MMM-Solarman item";
         dataCellTitle.innerHTML = this.translate("MONTHPRODUCTION");
@@ -202,9 +218,9 @@ Module.register("MMM-Solarman", {
         // Append data row to table.
         table.appendChild(dataRow);
 		
-		
+		// row for year production
 		dataRow = document.createElement("tr");
-        // CURRENTPRODUCTION
+        // YEARPRODUCTION
         dataCellTitle = document.createElement("td");
         dataCellTitle.className = "MMM-Solarman item";
         dataCellTitle.innerHTML = this.translate("YEARPRODUCTION");
