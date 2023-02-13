@@ -7,7 +7,7 @@
 This module is an extention for the [MagicMirror](https://github.com/MichMich/MagicMirror).
 
 The module monitors the values of a Solarman PV device.
-The needed AppID and SecredID can be requested from Solarman customer Service (prefferably by chat)
+The needed AppID and SecredID can be requested from Solarman customer Service (preferably by chat)
 
 ## Installation
 
@@ -46,12 +46,12 @@ The following configuration options can be set and/or changed:
 
 | Option | Type | Default | Description |
 | ---- | ---- | ---- | ---- |
-| `accessToken` | `string` | `"abc"` | !!!! |
-| `deviceSn` | `string` | `"220......."` | Device Serial Number of your inverter |
-| `appId` | `string` | `"123456789"` | AppId, provided by Solarman customer service |
+| `accessToken` | `string` | `"eyJhbGci..."` | !!!! |
+| `deviceSn` | `string` | `"220107..."` | Device Serial Number of your inverter |
+| `appId` | `string` | `"10220727..."` | AppId, provided by Solarman customer service |
 | `showTempWhenOnline` | `boolean` | `true` | Temperature of device will be displayed in header |
-| `updateInterval` | `string` | `"2000"`| How often the table shall be updated [milliseconds] (2 minutes) |
-| `animationSpeed` | `string` | `"2000"` | Animation speed to fade in the module on startup [milliseconds] (2 seconds) |
+| `updateInterval` | `Int` | `2 * 60 * 1000`| How often the table shall be updated [milliseconds] (2 minutes) |
+| `animationSpeed` | `Int` | `2 * 1000` | Animation speed to fade in the module on startup [milliseconds] (2 seconds) |
 
 ## Updating
 
