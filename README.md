@@ -7,7 +7,7 @@
 This module is an extention for the [MagicMirror](https://github.com/MichMich/MagicMirror).
 
 The module monitors the values of a Solarman PV device.
-The needed AppID and SecredID can be requested from Solarman customer Service (preferably by chat)
+The needed App_ID and App_Secret can be requested from Solarman customer Service (preferably by chat: ask for API access)
 
 ## Installation
 
