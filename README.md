@@ -46,7 +46,7 @@ The following configuration options can be set and/or changed:
 
 | Option | Type | Default | Description |
 | ---- | ---- | ---- | ---- |
-| `accessToken` | `string` | `"eyJhbGci..."` | accessToken to be requested with App_Secret (from Solarman customer service): see below |
+| `accessToken` | `string` | `"eyJhbGci..."` | accessToken to be requested with App_Secret every 60 days: see below |
 | `deviceSn` | `string` | `"220107..."` | Device Serial Number of your inverter |
 | `appId` | `string` | `"10220727..."` | AppId, provided by Solarman customer service |
 | `showTempWhenOnline` | `boolean` | `true` | Temperature of device will be displayed in header |
