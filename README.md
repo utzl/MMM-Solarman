@@ -58,7 +58,7 @@ The following configuration options can be set and/or changed:
 
 Go to https://reqbin.com/curl 
 
-Paste the below into the left window, make sure you changed the relevant sections.
+Paste the below into the left window, make sure you changed (four!) the relevant sections.
 
 You can hash your password by visiting [SHA256 Online](https://emn178.github.io/online-tools/sha256.html).
 
@@ -74,6 +74,8 @@ You can hash your password by visiting [SHA256 Online](https://emn178.github.io/
 ````
 
 Grab your accessToken in the right box.
+
+(based on [link](https://community.home-assistant.io/t/collect-inverter-data-from-solarman-api/328760))
 
 
 ## Updating
