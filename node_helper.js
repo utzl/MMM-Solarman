@@ -24,7 +24,7 @@ module.exports = NodeHelper.create({
 	}, 
 	
 	getAccessToken: function () {
-		
+		// will be programmed later?
 		
 	},
 	
@@ -43,7 +43,7 @@ module.exports = NodeHelper.create({
 		var dataString = `{ "deviceSn": "${this.config.deviceSn}" }`;
 		
 		// define urls
-		let url = 'https://api.solarmanpv.com/device/v1.0/currentData?appId=' + this.config.appId + '&language=en&=';
+		let url = 'https://globalapi.solarmanpv.com/device/v1.0/currentData?appId=' + this.config.appId + '&language=en&=';
 		let urlH = 'https://api.solarmanpv.com/device/v1.0/historical?appId=' + this.config.appId + '&language=en&=';
 		
 		var options = {
@@ -59,13 +59,16 @@ module.exports = NodeHelper.create({
 			});
 		},  */
 	
+		// call for current data
+		// direct after call get historical data based on date of results
 		async function callback(error, response, body) {
 			if (!error && response.statusCode == 200) {
 				//console.log('body:', body); // Print the body
-				var result = JSON.parse(body);
+				var result = JSON.parse(body); // contains current data
 				
 				// check if data is available, then get historical data
-				if (result !== null && result !== undefined ) {
+				// result.success == true if access_token is valid
+				if (result !== null && result !== undefined && result.success) {
 					// change request url
 					options['url'] = urlH; 
 					
@@ -97,7 +100,7 @@ module.exports = NodeHelper.create({
 							var hisDataY = resultHY.paramDataList[0].dataList;
 							result = {...result, hisDataY};
 						} else {
-						  console.log("MMM-Solarman: Could not load historical data.");
+						  console.log("MMM-Solarman: Could not load historical year data.");
 						}
 					}
 					request(options, callbackHY); 
@@ -107,7 +110,7 @@ module.exports = NodeHelper.create({
 					//var dataStringHis = JSON.parse(dataString);
 					dataStringHis.timeType = "3";
 					// check month if one or two digits
-					if (parseInt(month) < 10) {
+					if (month.length < 2) {
 						dataStringHis.startTime = "20" + year + '-0' + month;
 						dataStringHis.endTime = "20" + year + '-0' + month;
 					} else {
@@ -126,10 +129,12 @@ module.exports = NodeHelper.create({
 							var hisDataM = resultHM.paramDataList[0].dataList;
 							result = {...result, hisDataM};
 						} else {
-						  console.log("MMM-Solarman: Could not load historical data.");
+						  console.log("MMM-Solarman: Could not load historical month data.");
 						}
 					}
 					request(options, callbackHM); 
+				} else {
+				  console.log("MMM-Solarman: Could not load data. Message:", result.msg);
 				}
 				
 				// wait 2 sec befor sending the data
@@ -142,7 +147,7 @@ module.exports = NodeHelper.create({
 				self.sendSocketNotification("DATA", result);
 				
 			} else {
-			  console.log("MMM-Solarman: Could not load data.");
+			  console.log("MMM-Solarman: Call not successful.");
 			}
 		}
 
