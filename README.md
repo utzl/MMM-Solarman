@@ -57,11 +57,12 @@ The following configuration options can be set and/or changed:
 ## Request an accessToken
 
 Go to https://reqbin.com/curl 
-Paste the below into the left window, make sure you namend the relevant sections.
 
-You can hash your password by visiting https://emn178.github.io/online-tools/sha256.html
+Paste the below into the left window, make sure you changed the relevant sections.
 
-````javascript
+You can hash your password by visiting [SHA256 Online](https://emn178.github.io/online-tools/sha256.html).
+
+````curl
     curl --request POST \
   --url 'https://globalapi.solarmanpv.com/account/v1.0/token?appId=<appId>&language=en&=' \
   --header 'Content-Type: application/json' \
