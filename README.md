@@ -63,7 +63,7 @@ Paste the below into the left window, make sure you changed the relevant section
 You can hash your password by visiting [SHA256 Online](https://emn178.github.io/online-tools/sha256.html).
 
 ````curl
-    curl --request POST \
+  curl --request POST \
   --url 'https://globalapi.solarmanpv.com/account/v1.0/token?appId=<appId>&language=en&=' \
   --header 'Content-Type: application/json' \
   --data '{
@@ -73,6 +73,7 @@ You can hash your password by visiting [SHA256 Online](https://emn178.github.io/
 }'
 ````
 
+Grab your accessToken in the right box.
 
 
 ## Updating
