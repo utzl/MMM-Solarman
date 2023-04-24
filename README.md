@@ -46,12 +46,33 @@ The following configuration options can be set and/or changed:
 
 | Option | Type | Default | Description |
 | ---- | ---- | ---- | ---- |
-| `accessToken` | `string` | `"eyJhbGci..."` | accessToken to be requested with AppSecret (from Solarman customer service): see https://community.home-assistant.io/t/collect-inverter-data-from-solarman-api/328760 |
+| `accessToken` | `string` | `"eyJhbGci..."` | accessToken to be requested with App_Secret (from Solarman customer service): see below |
 | `deviceSn` | `string` | `"220107..."` | Device Serial Number of your inverter |
 | `appId` | `string` | `"10220727..."` | AppId, provided by Solarman customer service |
 | `showTempWhenOnline` | `boolean` | `true` | Temperature of device will be displayed in header |
 | `updateInterval` | `Int` | `2 * 60 * 1000`| How often the table shall be updated [milliseconds] (2 minutes) |
 | `animationSpeed` | `Int` | `2 * 1000` | Animation speed to fade in the module on startup [milliseconds] (2 seconds) |
+
+
+## Request an accessToken
+
+Go to https://reqbin.com/curl 
+Paste the below into the left window, make sure you namend the relevant sections.
+
+You can hash your password by visiting https://emn178.github.io/online-tools/sha256.html
+
+````javascript
+    curl --request POST \
+  --url 'https://globalapi.solarmanpv.com/account/v1.0/token?appId=<appId>&language=en&=' \
+  --header 'Content-Type: application/json' \
+  --data '{
+	"appSecret": "<appSecret>",
+	"email": "<email>",
+	"password": "<passwordConvertedToSHA256>"
+}'
+````
+
+
 
 ## Updating
 
