@@ -44,7 +44,7 @@ module.exports = NodeHelper.create({
 		
 		// define urls
 		let url = 'https://globalapi.solarmanpv.com/device/v1.0/currentData?appId=' + this.config.appId + '&language=en&=';
-		let urlH = 'https://api.solarmanpv.com/device/v1.0/historical?appId=' + this.config.appId + '&language=en&=';
+		let urlH = 'https://globalapi.solarmanpv.com/device/v1.0/historical?appId=' + this.config.appId + '&language=en&=';
 		
 		var options = {
 			url: url,
