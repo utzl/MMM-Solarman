@@ -72,21 +72,21 @@ module.exports = NodeHelper.create({
 					// change request url
 					options['url'] = urlH; 
 					
-					// sometime length of list changes so that a direct assignment for month and year 
-					// via a position number is not successful: 
+					// sometime solarman company changes their structure :-( 
 					// therefore the values of interest are searched inside the whole list
 					for (let i = 0; i < result.dataList.length; i++){
-						if (result.dataList[i].key == 'YEAR')
-							var year = result.dataList[i].value;
-						if (result.dataList[i].key == 'MONTH')
-							var month = result.dataList[i].value;
+						if (result.dataList[i].key == 'SYSTIM1'){
+							var systime = result.dataList[i].value; //e.g. "2023-09-28 19:03:27"
+							var year = systime.slice(0, 4);
+							var month = systime.slice(5, 7);
+						}
 					}
 					 
 					// input string for YEAR production
 					var dataStringHis = JSON.parse(dataString);
 					dataStringHis.timeType = "4";
-					dataStringHis.startTime = "20" + year;
-					dataStringHis.endTime = "20" + year;
+					dataStringHis.startTime = year;
+					dataStringHis.endTime = year;
 					dataString = JSON.stringify(dataStringHis);
 					//console.log("MMM-Solarman: dataString YEAR prod: ", dataString);
 					// implement request string
@@ -109,14 +109,8 @@ module.exports = NodeHelper.create({
 					// input string for MONTH production
 					//var dataStringHis = JSON.parse(dataString);
 					dataStringHis.timeType = "3";
-					// check month if one or two digits
-					if (month.length < 2) {
-						dataStringHis.startTime = "20" + year + '-0' + month;
-						dataStringHis.endTime = "20" + year + '-0' + month;
-					} else {
-						dataStringHis.startTime = "20" + year + '-' + month;
-						dataStringHis.endTime = "20" + year + '-' + month;
-					}
+					dataStringHis.startTime = year + '-' + month;
+					dataStringHis.endTime = year + '-' + month;
 					dataString = JSON.stringify(dataStringHis);
 					// implement request string
 					options['body'] = dataString;
