@@ -1,0 +1,17 @@
+{
+  "name": "mmm-solarman",
+  "version": "0.0.1",
+  "description": "A MagicMirror² module tht monitors the values of a Solarman PV device.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/utzl/MMM-Solarman"
+  },
+  "keywords": [
+  ],
+  "author": "utzl",
+  "license": "MIT",
+  "homepage": "https://github.com/utzl/MMM-Solarman#readme",
+  "dependencies": {
+    "request": "^2.88.2"
+  }
+}
