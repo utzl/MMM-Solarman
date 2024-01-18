@@ -60,7 +60,7 @@ The following configuration options can be set and/or changed:
 
 Go to https://reqbin.com/curl 
 
-Paste the below into the left window, make sure you changed (four!) the relevant sections.
+Paste the below into the left window, make sure you changed (four!) the relevant sections. (and remove the < and >)
 
 You can hash your password by visiting [SHA256 Online](https://emn178.github.io/online-tools/sha256.html).
 
