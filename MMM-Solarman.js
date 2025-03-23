@@ -180,7 +180,7 @@ Module.register("MMM-Solarman", {
 			// UNIT
 			dataCellUnit = document.createElement("td");
 			dataCellUnit.className = "MMM-Solarman-unit";
-			dataCellUnit.innerHTML = 'W';
+			dataCellUnit.innerHTML = '&nbsp;W';
 			dataRow.appendChild(dataCellUnit);
 			// Append data row to table.
 			table.appendChild(dataRow);
@@ -200,7 +200,7 @@ Module.register("MMM-Solarman", {
 			// UNIT
 			dataCellUnit = document.createElement("td");
 			dataCellUnit.className = "MMM-Solarman-unit";
-			dataCellUnit.innerHTML = 'kWh';
+			dataCellUnit.innerHTML = '&nbsp;kWh';
 			dataRow.appendChild(dataCellUnit);
 			// Append data row to table.
 			table.appendChild(dataRow);
@@ -220,7 +220,7 @@ Module.register("MMM-Solarman", {
 			// UNIT
 			dataCellUnit = document.createElement("td");
 			dataCellUnit.className = "MMM-Solarman-unit";
-			dataCellUnit.innerHTML = 'kWh';
+			dataCellUnit.innerHTML = '&nbsp;kWh';
 			dataRow.appendChild(dataCellUnit);
 			// Append data row to table.
 			table.appendChild(dataRow);
@@ -240,7 +240,7 @@ Module.register("MMM-Solarman", {
 			// UNIT
 			dataCellUnit = document.createElement("td");
 			dataCellUnit.className = "MMM-Solarman-unit";
-			dataCellUnit.innerHTML = 'kWh';
+			dataCellUnit.innerHTML = '&nbsp;kWh';
 			dataRow.appendChild(dataCellUnit);
 			// Append data row to table.
 			table.appendChild(dataRow);
