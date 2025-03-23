@@ -4,6 +4,6 @@
     "DAILYPRODUCTION": "Tagesleistung",
     "TOTALPRODUCTION": "Gesamtleistung",
     "CURRENTPRODUCTION": "Aktuelle Leistung",
-	"YEARPRODUCTION": "Produktion dieses Jahr",
-	"MONTHPRODUCTION": "Produktion dieser Monat"
+	"YEARPRODUCTION": "Produktion dieses Jahr&nbsp;",
+	"MONTHPRODUCTION": "Produktion dieser Monat&nbsp;"
 }

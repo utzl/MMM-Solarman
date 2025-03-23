@@ -4,6 +4,6 @@
     "DAILYPRODUCTION": "Daily Production",
     "TOTALPRODUCTION": "Total Production",
     "CURRENTPRODUCTION": "Current Power Output",
-	"YEARPRODUCTION": "Production this year",
-	"MONTHPRODUCTION": "Production this month"
+	"YEARPRODUCTION": "Production this year&nbsp;",
+	"MONTHPRODUCTION": "Production this month&nbsp;"
 }
