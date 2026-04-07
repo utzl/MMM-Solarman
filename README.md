@@ -54,6 +54,8 @@ The following configuration options can be set and/or changed:
 | `showTempWhenOnline` | `boolean` | `true` | Temperature of device will be displayed in header |
 | `updateInterval` | `Int` | `2 * 60 * 1000`| How often the table shall be updated [milliseconds] (2 minutes) |
 | `animationSpeed` | `Int` | `2 * 1000` | Animation speed to fade in the module on startup [milliseconds] (2 seconds) |
+| `showProdMonth` | `boolean` | `true` | The production of the month will be displayed |
+| `showProdYear` | `boolean` | `true` | The production of the year will be displayed |
 
 
 ## Request an accessToken
