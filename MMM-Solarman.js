@@ -14,6 +14,8 @@ Module.register("MMM-Solarman", {
 		showTempWhenOnline: true,
 		updateInterval: 2 * 60 * 1000, // every minute
 		animationSpeed: 2 * 1000, // 2 seconds
+		showProdMonth: true,
+		showProdYear: true,
 	},
 	
 	
@@ -206,44 +208,48 @@ Module.register("MMM-Solarman", {
 			table.appendChild(dataRow);
 			
 			// row for month production
-			dataRow = document.createElement("tr");
-			// MONTHPRODUCTION
-			dataCellTitle = document.createElement("td");
-			dataCellTitle.className = "MMM-Solarman-item";
-			dataCellTitle.innerHTML = this.translate("MONTHPRODUCTION");
-			dataRow.appendChild(dataCellTitle); 
-			// VALUE
-			dataCellValue = document.createElement("td");
-			dataCellValue.className = "MMM-Solarman-value";
-			dataCellValue.innerHTML = totalProdM;
-			dataRow.appendChild(dataCellValue);
-			// UNIT
-			dataCellUnit = document.createElement("td");
-			dataCellUnit.className = "MMM-Solarman-unit";
-			dataCellUnit.innerHTML = '&nbsp;kWh';
-			dataRow.appendChild(dataCellUnit);
-			// Append data row to table.
-			table.appendChild(dataRow);
+			if (this.config.showProdMonth){
+				dataRow = document.createElement("tr");
+				// MONTHPRODUCTION
+				dataCellTitle = document.createElement("td");
+				dataCellTitle.className = "MMM-Solarman-item";
+				dataCellTitle.innerHTML = this.translate("MONTHPRODUCTION");
+				dataRow.appendChild(dataCellTitle); 
+				// VALUE
+				dataCellValue = document.createElement("td");
+				dataCellValue.className = "MMM-Solarman-value";
+				dataCellValue.innerHTML = totalProdM;
+				dataRow.appendChild(dataCellValue);
+				// UNIT
+				dataCellUnit = document.createElement("td");
+				dataCellUnit.className = "MMM-Solarman-unit";
+				dataCellUnit.innerHTML = '&nbsp;kWh';
+				dataRow.appendChild(dataCellUnit);
+				// Append data row to table.
+				table.appendChild(dataRow);
+			}
 			
 			// row for year production
-			dataRow = document.createElement("tr");
-			// YEARPRODUCTION
-			dataCellTitle = document.createElement("td");
-			dataCellTitle.className = "MMM-Solarman-item";
-			dataCellTitle.innerHTML = this.translate("YEARPRODUCTION");
-			dataRow.appendChild(dataCellTitle); 
-			// VALUE
-			dataCellValue = document.createElement("td");
-			dataCellValue.className = "MMM-Solarman-value";
-			dataCellValue.innerHTML = totalProdY;
-			dataRow.appendChild(dataCellValue);
-			// UNIT
-			dataCellUnit = document.createElement("td");
-			dataCellUnit.className = "MMM-Solarman-unit";
-			dataCellUnit.innerHTML = '&nbsp;kWh';
-			dataRow.appendChild(dataCellUnit);
-			// Append data row to table.
-			table.appendChild(dataRow);
+			if (this.config.showProdYear){
+				dataRow = document.createElement("tr");
+				// YEARPRODUCTION
+				dataCellTitle = document.createElement("td");
+				dataCellTitle.className = "MMM-Solarman-item";
+				dataCellTitle.innerHTML = this.translate("YEARPRODUCTION");
+				dataRow.appendChild(dataCellTitle); 
+				// VALUE
+				dataCellValue = document.createElement("td");
+				dataCellValue.className = "MMM-Solarman-value";
+				dataCellValue.innerHTML = totalProdY;
+				dataRow.appendChild(dataCellValue);
+				// UNIT
+				dataCellUnit = document.createElement("td");
+				dataCellUnit.className = "MMM-Solarman-unit";
+				dataCellUnit.innerHTML = '&nbsp;kWh';
+				dataRow.appendChild(dataCellUnit);
+				// Append data row to table.
+				table.appendChild(dataRow);
+			}
 			
 			
 			// Append table  to wrapper.
