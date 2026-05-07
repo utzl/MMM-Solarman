@@ -6,6 +6,12 @@
 
 This module is an extention for the [MagicMirror](https://github.com/MichMich/MagicMirror).
 
+## Attention
+
+I do not have a Solarman inverter anymore. NO MORE SUPORT FOR THIS MODULE POSSIBLE.
+
+## General
+
 The module monitors the values of a Solarman PV device.
 The needed App_ID and App_Secret can be requested from Solarman customer Service (preferably by chat: ask for API access)
 
